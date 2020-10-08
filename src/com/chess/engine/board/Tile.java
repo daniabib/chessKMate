@@ -10,7 +10,7 @@ public abstract class Tile {
 
     protected final int tileCoordinate;
 
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
@@ -22,7 +22,7 @@ public abstract class Tile {
     }
 
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
-        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES.get(tileCoordinate);
+        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     private Tile(int tileCoordinate) {
@@ -35,7 +35,7 @@ public abstract class Tile {
 
     public static final class EmptyTile extends Tile {
 
-        EmptyTile(int coordinate) {
+        private EmptyTile(int coordinate) {
             // super calls the constructor of the superclass.
             super(coordinate);
         }
@@ -55,7 +55,7 @@ public abstract class Tile {
 
         private final Piece pieceOnTile;
 
-        OccupiedTile(int coordinate, Piece pieceOnTile) {
+        private OccupiedTile(int coordinate, Piece pieceOnTile) {
             super(coordinate);
             this.pieceOnTile = pieceOnTile;
         }
