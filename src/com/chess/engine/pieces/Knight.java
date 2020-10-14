@@ -53,7 +53,7 @@ public class Knight extends Piece {
 
     // Edge cases
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
-        return BoardUtils.FIRS_COLUMN[currentPosition] &&
+        return BoardUtils.FIRST_COLUMN[currentPosition] &&
                 ((candidateOffset == -17) || (candidateOffset == -10) ||
                         (candidateOffset == 6) || (candidateOffset == 15));
     }
